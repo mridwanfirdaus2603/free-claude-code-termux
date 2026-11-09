@@ -96,6 +96,30 @@ FCC opens the Admin UI after starting. On Windows and macOS, use the tray or
 menu-bar icon to open Admin, restart, or quit. When using `fcc-server`, keep its
 terminal open.
 
+### Termux (Android)
+
+Use the native Termux app, not a Linux distribution inside PRoot. Clone this
+repository and run its Termux installer:
+
+```bash
+pkg install -y git
+git clone https://github.com/mridwanfirdaus2603/free-claude-code-termux.git
+cd free-claude-code-termux
+sh scripts/install-termux.sh
+```
+
+The installer uses Termux's Python and Node.js, installs the locked Python
+dependencies, and installs the Claude Code CLI if it is not already available.
+It checks that the installed Python exactly matches `requires-python` in
+`pyproject.toml`; if it does not, update Termux packages before retrying. Native
+dependencies such as gRPC and tiktoken may take several minutes to compile.
+
+Start `fcc-server` in one Termux session and keep that session open. Open
+`http://127.0.0.1:8082` in the Android browser to configure a provider, then run
+`fcc-claude` in another Termux session. To remove FCC's Termux environment and
+command links without removing your configuration or Claude Code, run
+`sh scripts/uninstall-termux.sh` from the repository checkout.
+
 <a id="nvidia-nim-provider"></a>
 
 ### 3. Configure NVIDIA NIM
